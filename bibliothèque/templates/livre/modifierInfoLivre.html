@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">    
+    </div>
+
+    <!-- Form to Modify a Book Start -->
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Modifier un livre</h4>
+                <p class="mb-30">Formulaire pour modifier les informations d'un livre</p>
+            </div>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <!-- Submit Button -->
+            <div class="form-group row">
+                <div class="col-sm-12 col-md-10 offset-md-2">
+                    <button type="submit" class="btn btn-primary">Soumettre</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Form to Modify a Book End -->
+
+    <!-- js -->
+    <script src="vendors/scripts/core.js"></script>
+    <script src="vendors/scripts/script.min.js"></script>
+    <script src="vendors/scripts/process.js"></script>
+    <script src="vendors/scripts/layout-settings.js"></script>
+</div>
+{% endblock %}

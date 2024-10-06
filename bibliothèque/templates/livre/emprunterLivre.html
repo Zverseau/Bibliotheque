@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Emprunter un Livre{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <!-- Form to Borrow a Book Start -->
+        <div class="pd-20 card-box mb-30">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4 class="text-blue h4">Emprunter le livre : {{ livre.titre }}</h4>
+                    <p class="mb-30">Formulaire pour emprunter ce livre</p>
+                </div>
+            </div>
+
+            <!-- Formulaire d'emprunt -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }} <!-- Application des classes par défaut -->
+                </div>
+                
+                <!-- Buttons -->
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-10 offset-md-2">
+                        <a href="{% url 'home' %}" class="btn btn-secondary">Retour à la liste</a>
+                        <button type="submit" class="btn btn-primary">Emprunter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Form to Borrow a Book End -->
+    </div>
+
+    <!-- js -->
+    <script src="vendors/scripts/core.js"></script>
+    <script src="vendors/scripts/script.min.js"></script>
+    <script src="vendors/scripts/process.js"></script>
+    <script src="vendors/scripts/layout-settings.js"></script>
+</div>
+{% endblock %}

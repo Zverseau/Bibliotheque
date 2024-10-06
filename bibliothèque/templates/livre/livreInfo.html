@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Détails du Livre{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="blog-wrap">
+                <div class="container pd-0">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12">
+                            <div class="blog-detail card-box overflow-hidden mb-30">
+                                <div class="blog-img">
+                                    <img src="{{ livre.photo.url }}" alt="{{ livre.titre }}" class="book-img">
+                                </div>
+                                <div class="blog-caption">
+                                    <h4 class="mb-10">{{ livre.titre }}</h4>
+                                    <p><strong>Auteur :</strong> {{ livre.auteur }}</p>
+                                    <p><strong>Description :</strong> {{ livre.description }}</p>
+                                    <p><strong>ISBN :</strong> {{ livre.isbn }}</p>
+                                    <p><strong>Nombre en stock :</strong> {{ livre.nbr_en_stock }}</p>
+                                    <div class="mt-10">
+                                        <a href="{% url 'modifier_livre' livre.id %}" class="btn">Modifier</a>
+                                        <a href="{% url 'home' %}" class="btn">Retour à la liste</a>
+                                        <a href="{% url 'emprunter_livre' livre.id %}" class="btn btn-primary">Emprunter ce livre</a>
+                                        <a href="#" onclick="confirmDeletion('{% url 'supprimer_livre' livre.id %}'); return false;" class="btn btn-danger">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .book-img {
+        max-width: 100%; /* Assure que l'image ne dépasse pas la largeur du conteneur */
+        height: auto; /* Maintient les proportions de l'image */
+        width: 410px; /* Ajuste la largeur de l'image selon tes besoins */
+    }
+</style>
+
+<script>
+    function confirmDeletion(url) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')) {
+            window.location.href = url;
+        }
+    }
+</script>
+{% endblock %}

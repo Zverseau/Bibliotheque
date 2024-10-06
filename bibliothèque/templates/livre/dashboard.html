@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  /* Pas de centrage ici */
+}
+
+.product {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  margin: 0; /* Supprimer les marges automatiques */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+
+.product img {
+  width: 150px; 
+  height: 200px; 
+  object-fit: cover; 
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.product h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.product p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.product .price {
+  font-size: 1.5rem;
+  color: #d9534f;
+  margin-bottom: 15px;
+}
+
+.product button {
+  display: none; /* Cacher le bouton par défaut */
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto;
+}
+
+.product button:hover {
+  background-color: #c9302c;
+}
+
+.product:hover .btn-details {
+  display: block; /* Afficher le bouton au survol */
+}
+
+.product .heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #d9534f;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="main-container">
+  <div class="pd-ltr-20 xs-pd-20-10">    
+  </div>
+
+  <div class="container">
+    {% for livre in livres %}
+    <div class="product">
+        <a href="{% url 'livre_detail' livre.id %}" class="product-link">
+            <span class="heart-icon">&hearts;</span>
+            <img src="{{ livre.photo.url }}" alt="{{ livre.titre }}">
+            <h2>{{ livre.titre }}</h2>
+            <p>{{ livre.auteur }}</p>
+            <button class="btn-details">Détails</button>
+        </a>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Liste des emprunteurs{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            Tableau de bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Liste des emprunteurs
+                        </a>
+                    </li>
+                    <!-- Ajoutez d'autres éléments du menu ici -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Contenu principal -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix mb-20">
+                    <h4 class="text-blue h4">Liste des emprunteurs</h4>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Téléphone</th>
+                            <th scope="col">Livre</th>
+                            <th scope="col">Date d'emprunt</th>
+                            <th scope="col">Date de retour</th>
+                            <th scope="col">Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emprunt in emprunts %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ emprunt.nom }}</td>
+                            <td>{{ emprunt.prenom }}</td>
+                            <td>{{ emprunt.email }}</td>
+                            <td>{{ emprunt.telephone }}</td>
+                            <td>{{ emprunt.livre.titre }}</td>
+                            <td>{{ emprunt.date_emprunt }}</td>
+                            <td>{{ emprunt.date_retour }}</td>
+                            <td>
+                                {% if emprunt.statut_emprunt == 'en_cours' %}
+                                <span class="badge badge-primary">En cours</span>
+                                {% elif emprunt.statut_emprunt == 'retournee' %}
+                                <span class="badge badge-success">Retourné</span>
+                                {% else %}
+                                <span class="badge badge-warning">En retard</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'modifierEmprunt' emprunt.id %}" class="btn button">Modifier</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
